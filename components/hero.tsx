@@ -38,7 +38,7 @@ export function Hero() {
   const defaultInfo = {
     greeting: "안녕하세요,",
     name: "황정현",
-    title: "단국대학교 학생입니다 ㅇㅇㅇ",
+    title: "단국대학교 학생입니다.",
     description: "프롭테크 기술로 부동산 시장을 분석합니다.",
     profileImage: "",
     backgroundImage: "",
