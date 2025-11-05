@@ -392,3 +392,95 @@ input[type="range"] {
 }
 
 /* ========== 1. 스타일 코드 끝 ========== */
+/* ========== 4. 메인 페이지 프로젝트 선택 그리드 (여기에 복사) ========== */
+
+/* 프로젝트 카드들을 담을 격자(Grid) */
+.project-selection-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* 모바일에선 1줄 */
+  gap: 24px;
+  max-width: 900px; /* 두 카드가 놓일 최대 너비 */
+  margin: 40px auto;
+  padding: 0 20px; /* 좌우 여백 */
+}
+
+/* PC 화면 (768px 이상)에서는 2줄로 보이게 함 */
+@media (min-width: 768px) {
+  .project-selection-grid {
+    grid-template-columns: 1fr 1fr; /* 데스크탑에선 2줄 */
+  }
+}
+
+/* 개별 선택 카드 디자인 */
+.selection-card {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 내용과 버튼을 위아래로 떼어놓음 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.selection-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.selection-card h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.selection-card p {
+  font-size: 1.0em; /* 메인 페이지에서는 폰트를 조금 작게 */
+  color: #555;
+  line-height: 1.6;
+  flex-grow: 1; /* 설명글이 카드의 남은 공간을 채움 */
+}
+
+/* 버튼이 항상 카드 맨 아래에 붙도록 */
+.selection-card .download-button {
+   margin-top: 20px; 
+}
+/* ========== 4. 스타일 코드 끝 ========== */
+/* ========== 5. 이미지 호버(툴팁) 스타일 (여기에 복사) ========== */
+
+/* [그림 2] 글자에 적용할 스타일 */
+.image-hover-trigger {
+  position: relative; /* 이 녀석을 부모(기준점)로 삼음 */
+  font-weight: bold;
+  color: #007bff; /* 파란색으로 강조 */
+  text-decoration: underline; /* 밑줄 */
+  text-decoration-style: dashed; /* 점선 밑줄 */
+  cursor: help; /* 마우스 커서를 '도움말' 모양으로 */
+}
+
+/* 팝업될 이미지 스타일 */
+.image-hover-popup {
+  position: absolute; /* 부모(.image-hover-trigger) 기준 */
+  display: none; /* 평소에는 숨김 */
+  
+  /* 위치: 글자(부모)의 위쪽 중앙에 배치 */
+  bottom: 140%; /* 글자보다 140% 위에 */
+  left: 50%;
+  transform: translateX(-50%); /* X축 기준으로 정확히 중앙에 */
+
+  width: 450px; /* 팝업될 이미지의 가로 크기 */
+  background-color: white;
+  border: 2px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10; /* 다른 요소들보다 위에 보이도록 */
+}
+
+/* 마법: .image-hover-trigger에 마우스를 올리면(.hover) ... */
+/* 그 자식인 .image-hover-popup을... */
+.image-hover-trigger:hover .image-hover-popup {
+  display: block; /* ...보이게 한다! */
+}
+
+/* ========== 5. 스타일 코드 끝 ========== */

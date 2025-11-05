@@ -97,10 +97,10 @@ export function About() {
   // 기본 데이터
   const defaultInfo = {
     title: "소개",
-    subtitle: "당신의 전문성과 열정을 소개해주세요.",
+    subtitle: "",
     background: {"image":"","video":"","color":"","opacity":0.1},
-    experienceCards: [{"icon":"graduation","title":"단국대학교 도시계획부동산학부 ","period":"2022~","description":"전공 및 학위"},{"icon":"award","title":"자격증/수상","period":"2022~","description":"설명을 입력하세요"}],
-    skills: [{"icon":"code","title":"프론트엔드 개발","description":"React, TypeScript, Next.js를 활용한 모던 웹 개발"},{"icon":"database","title":"백엔드 개발","description":"Node.js, Python, 데이터베이스 설계 및 구현"},{"icon":"palette","title":"UI/UX 디자인","description":"사용자 중심의 인터페이스 디자인"}],
+    experienceCards: [{"icon":"graduation","title":"단국대학교 도시계획부동산학부 ","period":"2022~","description":"전공 및 학위"},{"icon":"award","title":"투자자산운용사 자격증 취득","period":"2025","description":"자격증"}],
+    skills: [{"icon":"barChart","title":"부동산 금융 및 계량 분석 ","description":"\"저는 '감'이 아닌 '데이터'로 시장을 분석합니다.\" "},{"icon":"target","title":"부동산 투자 및 법률 분석 역량","description":"\"저는 '수익'만 보지 않고, 그 이면의 '리스크'를 먼저 식별합니다.\""},{"icon":"server","title":"프롭테크 기술 구현 역량","description":"\"저는 분석에서 멈추지 않고, '체험'할 수 있는 서비스로 구현합니다.\""}],
     storyTitle: "나의 이야기",
     story: ["저는 기술을 통해 사람들의 삶을 더 편리하고 의미 있게 만드는 일에 열정을 가지고 있습니다.","다양한 프로젝트를 통해 문제 해결 능력과 창의적인 사고를 키워왔으며, 팀원들과의 협업을 통해 함께 성장하는 가치를 배웠습니다.","앞으로도 지속적인 학습과 도전을 통해 더 나은 개발자가 되기 위해 노력하겠습니다."],
     storyImage: "",
