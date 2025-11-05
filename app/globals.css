@@ -227,4 +227,168 @@
   .min-h-screen {
     min-height: 100dvh;
   }
+}/* ========== 1. 시뮬레이터 & 보고서 스타일 (여기에 복사) ========== */
+
+/* 전체 컨테이너 */
+.simulator-container {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
+
+.simulator-container h2 {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+}
+
+.simulator-container p {
+  text-align: center;
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+/* 입력 그룹 (라벨 + 컨트롤) */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* 슬라이더, 선택박스 공통 스타일 */
+input[type="range"],
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="range"] {
+  padding: 0;
+}
+
+/* 토글 스위치 */
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 28px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #ccc;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch:checked {
+  background-color: #007bff;
+}
+
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: white;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.3s;
+}
+
+.toggle-switch:checked::before {
+  transform: translateX(21px);
+}
+
+/* 결과 박스 */
+.result-box {
+  background-color: #ffffff;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.result-box p {
+  margin: 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.result-box h3 {
+  font-size: 2.5em;
+  color: #007bff;
+  margin: 5px 0 0 0;
+  letter-spacing: -1px;
+}
+
+/* 분석 근거 섹션 (수정본) */
+.report-summary {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 20px auto 40px auto; /* z-index 관련 코드를 모두 삭제하고 깔끔한 margin으로 수정 */
+}
+.report-summary h3,
+.report-summary h4 {
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.report-summary p {
+  color: #555;
+  line-height: 1.7;
+  font-size: 15px;
+  text-align: left;
+}
+
+.report-summary ul {
+  padding-left: 20px;
+}
+
+.report-summary li {
+  margin-bottom: 12px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 다운로드 & 링크 버튼 (공용) */
+.download-button {
+  display: block;
+  width: 100%;
+  background-color: #333;
+  color: white !important; /* 링크 색상 강제 */
+  text-align: center;
+  padding: 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+}
+
+.download-button:hover {
+  background-color: #007bff;
+  color: white !important;
+}
+
+/* ========== 1. 스타일 코드 끝 ========== */
