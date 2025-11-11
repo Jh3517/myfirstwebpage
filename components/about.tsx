@@ -100,7 +100,7 @@ export function About() {
     subtitle: "",
     background: {"image":"","video":"","color":"","opacity":0.1},
     experienceCards: [{"icon":"graduation","title":"단국대학교 도시계획부동산학부 ","period":"2022~","description":"전공 및 학위"},{"icon":"award","title":"투자자산운용사 자격증 취득","period":"2025","description":"자격증"}],
-    skills: [{"icon":"barChart","title":"부동산 금융 및 계량 분석 ","description":"\"저는 '감'이 아닌 '데이터'로 시장을 분석합니다.\" "},{"icon":"target","title":"부동산 투자 및 법률 분석 역량","description":"\"저는 '수익'만 보지 않고, 그 이면의 '리스크'를 먼저 식별합니다.\""},{"icon":"server","title":"프롭테크 기술 구현 역량","description":"\"저는 분석에서 멈추지 않고, '체험'할 수 있는 서비스로 구현합니다.\""}],
+    skills: [{"icon":"barChart","title":"부동산 금융 및 계량 분석 ","description":"\"저는 '감'이 아닌 '데이터'로 시장을 분석합니다.\" "},{"icon":"shield","title":"부동산 투자 및 법률 분석 역량","description":"\"저는 '수익'만 보지 않고, 그 이면의 '리스크'를 먼저 식별합니다.\""},{"icon":"database","title":"프롭테크 기술 구현 역량","description":"\"저는 분석에서 멈추지 않고, '체험'할 수 있는 서비스로 구현합니다.\""}],
     storyTitle: "나의 이야기",
     story: ["저는 기술을 통해 사람들의 삶을 더 편리하고 의미 있게 만드는 일에 열정을 가지고 있습니다.","다양한 프로젝트를 통해 문제 해결 능력과 창의적인 사고를 키워왔으며, 팀원들과의 협업을 통해 함께 성장하는 가치를 배웠습니다.","앞으로도 지속적인 학습과 도전을 통해 더 나은 개발자가 되기 위해 노력하겠습니다."],
     storyImage: "",
@@ -302,35 +302,98 @@ export function About() {
           </div>
 
           {/* 핵심 역량 */}
-          {(aboutInfo.skills.length > 0 || isEditMode) && (
-            <div className="mb-16">
-              <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
-                핵심 역량
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {aboutInfo.skills.map((skill, index) => {
-                  const Icon = SKILL_ICONS[skill.icon as keyof typeof SKILL_ICONS] || Trophy
-                  return (
-                    <div key={index} className="text-center relative">
-                      {isEditMode && (
-                        <button
-                          onClick={() => removeSkill(index)}
-                          className={COMMON_STYLES.deleteButton}
-                        >
-                          <X className={COMMON_STYLES.deleteIcon} />
-                        </button>
-                      )}
-                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                        <Icon className="h-8 w-8 text-primary" />
-                      </div>
-                      <h4 className="font-semibold text-foreground mb-2">
-                        <EditableText
-                          value={skill.title}
-                          onChange={(value) => updateSkill(index, 'title', value)}
-                          storageKey={`about-skill-${index}-title`}
-                        />
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
+{/* ========== ⭐️ 핵심 역량 (수정된 블록) ⭐️ ========== */}
+        {(aboutInfo.skills.length > 0 || isEditMode) && (
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
+              핵심 역량
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {aboutInfo.skills.map((skill, index) => {
+                const Icon = SKILL_ICONS[skill.icon as keyof typeof SKILL_ICONS] || Trophy
+                
+                // ⭐️ 각 카드별 상세 내용을 정의합니다 (index 0, 1, 2)
+                let detailsComponent;
+                if (index === 0) { // 첫 번째: 부동산 금융 및 계량 분석
+                  detailsComponent = (
+                    <div className="competency-details">
+                      <h4>📊 부동산 금융 및 계량 분석</h4>
+                      <h5>보유 역량</h5>
+                      <ul>
+                        <li><strong>시계열 분석:</strong> VAR, Granger 인과관계, IRF 등을 활용하여 금리 충격의 <strong>시차 효과(Lag Effect)</strong>를 계량적으로 분석함.</li>
+                        <li><strong>금융시장 인사이트:</strong> PF 연체율이 은행의 **BIS 비율** 및 **NPL**에 미치는 영향을 분석하고, 시중은행과 저축은행의 구조적 차이를 비교함.</li>
+                        <li><strong>데이터 전처리:</strong> 로그 변환 및 1차 차분을 통해 비정상 시계열 데이터를 가공.</li>
+                      </ul>
+                      <h5>학습 방향</h5>
+                      <ul>
+                        <li>머신러닝(ML) 기반 비선형 예측 모델을 학습하여, 부동산 가치평가(AVM) 모델의 정교화를 목표로 하고 있습니다.</li>
+                      </ul>
+                    </div>
+                  );
+                } else if (index === 1) { // 두 번째: 부동산 투자 및 법률 분석
+                  detailsComponent = (
+                    <div className="competency-details">
+                      <h4>⚖️ 부동산 투자 및 법률 분석</h4>
+                      <h5>보유 역량</h5>
+                      <ul>
+                        <li><strong>법률 실사 (Due Diligence):</strong> 등기부, 매각물건명세서 등을 교차 검증하여 <strong>대항력 없는 임차인</strong>을 특정하고 '권리분석상 안전한' 물건을 식별함.</li>
+                        <li><strong>리스크 관리:</strong> <strong>명도 리스크</strong> 및 체납관리비 리스크를 사전에 도출하고, '인도명령' 및 '협상비' 기반의 대응 전략을 수립.</li>
+                        <li><strong>가치평가(Valuation):</strong> '오피스텔' 용도를 활용한 **경락잔금대출 LTV 80%** 전략 및 **ROE 15.8%** 등 구체적인 수익성 분석.</li>
+                      </ul>
+                      <h5>학습 방향</h5>
+                      <ul>
+                        <li>NPL(부실채권) 투자, 상가 및 토지 등 <strong>특수물건</strong>의 권리분석 및 가치평가 방법론을 심화 학습 중입니다.</li>
+                      </ul>
+                    </div>
+                  );
+                } else if (index === 2) { // 세 번째: 프롭테크 기술 구현
+                  detailsComponent = (
+                    <div className="competency-details">
+                      <h4>💻 프롭테크 기술 구현</h4>
+                      <h5>보유 역량</h5>
+                      <ul>
+                        <li><strong>인터랙티브 UI/UX:</strong> 다중회귀분석 결과를 <strong>'AI 가치평가 시뮬레이터'</strong>로 구현.</li>
+                        <li><strong>데이터 시각화:</strong> 시계열 분석 데이터를 <strong>'Chart.js'</strong> 라이브러리 기반의 <strong>'인터랙티브 금융 차트'</strong>로 구현.</li>
+                        <li><strong>웹 개발:</strong> <strong>React(Next.js)</strong> 프레임워크를 사용하여 포트폴리오 사이트를 직접 구축하고 Vercel을 통해 배포.</li>
+                      </ul>
+                      <h5>학습 방향</h5>
+                      <ul>
+                        <li>Python(Flask)을 활용하여 계량 분석 모델을 **API로 직접 개발**하고, 이를 프론트엔드와 연동하는 풀스택(Full-Stack) 개발을 목표로 하고 있습니다.</li>
+                      </ul>
+                    </div>
+                  );
+                } else {
+                  detailsComponent = null; // 새로 추가하는 스킬은 상세 내용 없음
+                }
+
+                return (
+                  // ⭐️ 1. 'competency-card' 클래스 추가
+                  <div key={index} className="text-center relative competency-card p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
+                    {isEditMode && (
+                      <button
+                        onClick={() => removeSkill(index)}
+                        className={COMMON_STYLES.deleteButton}
+                      >
+                        <X className={COMMON_STYLES.deleteIcon} />
+                      </button>
+                    )}
+                    <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                      <Icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      <EditableText
+                        value={skill.title}
+                        onChange={(value) => updateSkill(index, 'title', value)}
+                        storageKey={`about-skill-${index}-title`}
+                      />
+                    </h4>
+                    
+                    {/* ⭐️ 2. 콘텐츠 교체 영역 래퍼 */}
+                    <div className="competency-content-wrapper">
+                      
+                      {/* ⭐️ 3. 평소에 보일 요약문 */}
+                      <p className="text-sm text-muted-foreground competency-summary">
                         <EditableText
                           value={skill.description}
                           onChange={(value) => updateSkill(index, 'description', value)}
@@ -338,23 +401,30 @@ export function About() {
                           multiline
                         />
                       </p>
-                    </div>
-                  )
-                })}
-                {isEditMode && (
-                  <div 
-                    className="text-center border-2 border-dashed border-muted-foreground/30 rounded-lg p-6 flex items-center justify-center cursor-pointer hover:border-primary transition-all"
-                    onClick={() => setShowSkillModal(true)}
-                  >
-                    <div>
-                      <Settings className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <p className="text-sm text-muted-foreground">스킬 편집</p>
+                      
+                      {/* ⭐️ 4. 마우스를 올리면 나타날 상세 내용 */}
+                      {detailsComponent}
+                      
                     </div>
                   </div>
-                )}
-              </div>
+                )
+              })}
+              
+              {isEditMode && (
+                <div 
+                  className="text-center border-2 border-dashed border-muted-foreground/30 rounded-lg p-6 flex items-center justify-center cursor-pointer hover:border-primary transition-all"
+                  onClick={() => setShowSkillModal(true)}
+                >
+                  <div>
+                    <Settings className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground">스킬 편집</p>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+          </div>
+        )}
+        {/* ========== ⭐️ 핵심 역량 (수정된 블록) 끝 ⭐️ ========== */}
 
           {/* 자기소개 상세 */}
           {(aboutInfo.story.length > 0 || isEditMode) && (

@@ -484,3 +484,305 @@ input[type="range"] {
 }
 
 /* ========== 5. 스타일 코드 끝 ========== */
+
+/* ========== 6. 핵심 역량 콘텐츠 교체 스타일 (수정본) ========== */
+
+/* 각 카드의 기준점 */
+.competency-card {
+  position: relative; /* 자식 요소들의 기준점 */
+  display: flex;
+  flex-direction: column; /* 아이콘, 제목, 내용이 세로로 쌓이도록 */
+  /* 템플릿의 기존 스타일(shadow, rounded 등)은 그대로 둡니다. */
+}
+
+/* 요약문 + 상세설명문 2개를 담을 컨테이너 */
+.competency-content-wrapper {
+  position: relative; /* 두 텍스트가 겹칠 기준점 */
+  flex-grow: 1; /* 이 영역이 카드의 남은 공간을 모두 차지 */
+  /* ⭐️ 중요: 카드가 덜컥거리지 않도록 최소 높이를 확보합니다 */
+  min-height: 250px; /* 이 높이는 카드 내용에 맞게 조절하세요 */
+}
+
+/* 평소에 보이는 '간단한 요약문' */
+.competency-summary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* 평소엔 보임 */
+  transition: opacity 0.3s ease;
+  /* 템플릿의 기존 p 태그 스타일을 가져옵니다 (text-sm text-muted-foreground) */
+  color: #6B7280; 
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6;
+}
+/* 다크 모드일 때 요약문 */
+.dark .competency-summary {
+  color: #9CA3AF;
+}
+
+
+/* 마우스를 올리면 나타날 '상세 설명문' */
+.competency-details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* 평소엔 숨김 */
+  transition: opacity 0.3s ease;
+  overflow-y: auto; /* 내용이 너무 길면 여기서만 스크롤 */
+  text-align: left; /* 상세 내용은 왼쪽 정렬 */
+  
+  /* 가독성을 위한 내부 스타일 */
+  background-color: rgba(243, 244, 246, 0.9); /* bg-gray-100/90 */
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+/* 다크 모드일 때 */
+.dark .competency-details {
+  background-color: rgba(31, 41, 55, 0.9); /* dark:bg-gray-800/90 */
+  border-color: #374151;
+}
+
+/* ⭐️ 마법: .competency-card에 마우스를 올리면(.hover)... ⭐️ */
+.competency-card:hover .competency-summary {
+  opacity: 0; /* ...요약문을 숨기고 */
+}
+.competency-card:hover .competency-details {
+  opacity: 1; /* ...상세설명문을 보여준다! */
+}
+
+/* 상세 설명문 내부 스타일 */
+.competency-details h4 {
+  font-size: 1.1em;
+  color: #007bff;
+  margin-top: 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+.dark .competency-details h4 {
+  border-color: #4B5563;
+}
+.competency-details h5 {
+  font-size: 1em;
+  color: #111827;
+  margin-top: 12px;
+  margin-bottom: 5px;
+}
+.dark .competency-details h5 {
+  color: #F9FAFB;
+}
+.competency-details ul {
+  padding-left: 20px;
+  margin: 0;
+}
+.competency-details li {
+  font-size: 0.95em;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.dark .competency-details li {
+  color: #9CA3AF;
+}
+/* ========== 6. 스타일 코드 끝 ========== */
+
+/* ========== 7. 심층 분석 쇼케이스 스타일 (globals.css에 '추가') ========== */
+
+/* 전체 쇼케이스 컨테이너 (왼쪽 탭, 오른쪽 콘텐츠) */
+.showcase-container {
+  display: flex;
+  flex-direction: column; /* 모바일에서는 세로로 쌓임 */
+  max-width: 1200px;
+  margin: 40px auto;
+  border: 1px solid #e5e7eb; /* dark:border-gray-700 */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* shadow-xl */
+  background-color: #ffffff; /* dark:bg-gray-900 */
+}
+/* 다크 모드 */
+.dark .showcase-container {
+  border-color: #374151;
+  background-color: #111827; /* dark:bg-gray-900 */
+}
+
+/* 왼쪽 '탭(Tab)' 목록 */
+.showcase-tabs {
+  display: flex;
+  flex-direction: row; /* 모바일에서는 가로 탭 */
+  border-bottom: 1px solid #e5e7eb; /* dark:border-gray-700 */
+}
+.dark .showcase-tabs {
+  border-color: #374151;
+}
+
+/* 개별 탭 버튼 */
+.showcase-tab {
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent; /* 비활성 탭 하단선 */
+  color: #6b7280; /* text-gray-500 */
+  transition: all 0.3s ease;
+  margin-bottom: -1px; /* 하단 경계선과 겹치도록 */
+}
+.dark .showcase-tab {
+  color: #9ca3af; /* dark:text-gray-400 */
+}
+
+/* 활성화된 탭 버튼 */
+.showcase-tab.active {
+  color: #007bff; /* text-primary */
+  border-bottom-color: #007bff; /* primary-color */
+}
+.dark .showcase-tab.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
+.showcase-tab:hover:not(.active) {
+  background-color: #f9fafb; /* dark:bg-gray-800 */
+}
+.dark .showcase-tab:hover:not(.active) {
+  background-color: #1f2937;
+}
+
+/* 오른쪽 '콘텐츠' 영역 */
+.showcase-content-area {
+  padding: 24px 32px;
+  flex-grow: 1;
+}
+
+/* 개별 콘텐츠 (평소엔 숨김) */
+.showcase-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+/* 활성화된 콘텐츠 (보여줌) */
+.showcase-content.active {
+  display: block;
+}
+
+/* 콘텐츠 내부 제목 */
+.showcase-content h3 {
+  font-size: 1.75rem; /* 2xl */
+  font-weight: 700;
+  color: #111827; /* dark:text-white */
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.dark .showcase-content h3 {
+  color: #ffffff;
+}
+
+/* 콘텐츠 내부 요약 텍스트 */
+.showcase-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4b5563; /* dark:text-gray-300 */
+  margin-bottom: 24px;
+}
+.dark .showcase-content p {
+  color: #d1d5db;
+}
+
+/* 콘텐츠 내부 스킬 태그 */
+.showcase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.showcase-tags span {
+  background-color: #e5e7eb; /* bg-gray-200 */
+  color: #374151; /* text-gray-700 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 9999px; /* rounded-full */
+}
+.dark .showcase-tags span {
+  background-color: #374151; /* dark:bg-gray-700 */
+  color: #e5e7eb; /* dark:text-gray-200 */
+}
+
+/* PDF 다운로드 버튼 (globals.css의 기존 .download-button 재활용 + 수정) */
+.showcase-content .download-button {
+  display: inline-flex; /* 텍스트 옆에 붙도록 */
+  width: auto;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #111827; /* dark:bg-gray-50 */
+  color: #ffffff; /* dark:text-gray-900 */
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.dark .showcase-content .download-button {
+  background-color: #f9fafb;
+  color: #111827;
+}
+.showcase-content .download-button:hover {
+  opacity: 0.8;
+}
+
+/* 비활성화된 버튼 (준비중) */
+.showcase-content .download-button.disabled {
+  background-color: #9ca3af; /* bg-gray-400 */
+  color: #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.dark .showcase-content .download-button.disabled {
+  background-color: #4b5563;
+  color: #9ca3af;
+}
+
+
+/* ⭐️ 데스크탑 반응형 ⭐️ */
+@media (min-width: 768px) { /* md: */
+  .showcase-container {
+    flex-direction: row; /* 데스크탑에서는 가로로 배치 */
+  }
+  .showcase-tabs {
+    flex-direction: column; /* 데스크탑에서는 세로 탭 */
+    width: 280px; /* 탭 너비 고정 */
+    flex-shrink: 0;
+    border-right: 1px solid #e5e7eb; /* dark:border-gray-700 */
+    border-bottom: none;
+  }
+  .dark .showcase-tabs {
+    border-right-color: #374151;
+  }
+  .showcase-tab {
+    border-bottom: none;
+    border-left: 4px solid transparent; /* 왼쪽 활성선 */
+    margin-bottom: 0;
+    margin-left: -1px; /* 오른쪽 경계선과 겹치도록 */
+  }
+  .showcase-tab.active {
+    border-bottom-color: transparent;
+    border-left-color: #007bff; /* primary-color */
+    background-color: #f9fafb; /* dark:bg-gray-800 */
+  }
+  .dark .showcase-tab.active {
+    border-left-color: #3b82f6;
+    background-color: #1f2937;
+  }
+}
+
+/* 페이드인 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
