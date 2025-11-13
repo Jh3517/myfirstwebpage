@@ -10,7 +10,7 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
   
   return (
     // Tailwind CSS 클래스로 기본 레이아웃 구성
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
+    <section id="projects" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
       <div className="container px-4 md:px-6">
         
         {/* 섹션 제목 */}
@@ -19,7 +19,7 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
             프로젝트
           </h2>
           <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            부동산 금융 및 투자 리스크에 대한 저의 심층 분석 프로젝트입니다.
+            부동산 금융 및 투자 리스크에 대한 심층 분석 프로젝트입니다.
             왼쪽 탭을 클릭하여 각 케이스 스터디를 확인하세요.
           </p>
         </div>
@@ -102,7 +102,7 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
             <div className={`showcase-content ${activeTab === 'trust' ? 'active' : ''}`}>
               <h3>(진행중) 신탁원부 분석을 통한 숨겨진 리스크 식별</h3>
               <p>
-                KB부동산신탁의 신탁원부 분석을 통해 우선수익권자와 잠재적 리스크를 식별하여,  
+                KB부동산신탁의 신탁원부 분석을 통해 KB부동산신탁의 리스크 관리 방안을 파악하여,  
                 PF 및 개발 사업 투자의 안정성을 확보하는 연구를 진행 중입니다.
               </p>
               <div className="showcase-tags">
