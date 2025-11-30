@@ -32,14 +32,14 @@ const AVAILABLE_ICONS = {
 export function Hero() {
   const { getData, saveData, isEditMode, saveToFile, saveFieldToFile } = useInlineEditor()
   
-  // 초기 데이터 - 배열 형태로 변경
+  // 초기 데이터
   const defaultSocialLinks = [{"name":"Instagram","icon":"instagram","url":"https://instagram.com/username"},{"name":"YouTube","icon":"youtube","url":"https://youtube.com/@username"}]
   
   const defaultInfo = {
-    greeting: "안녕하세요,",
-    name: "황정현",
-    title: "단국대학교 학생입니다.",
-    description: "프롭테크 기술로 부동산 시장을 분석합니다.",
+    greeting: " 단국대학교 부동산학과 ",
+    name: "황정현입니다.",
+    title: "부동산 업계의 전문가가 되기 위한 여정 중에 있습니다.",
+    description: "",
     profileImage: "",
     backgroundImage: "",
     backgroundVideo: "",
@@ -48,18 +48,19 @@ export function Hero() {
     background: {"image":"/uploads/hero-background-1762849258510.jpeg","video":"","color":"","opacity":1}
   }
 
-  const [backgroundData, setBackgroundData] = useState<{ image: string; video: string; color: string; opacity: number } | null>(null)
+  // 초기값 설정
+  const [backgroundData, setBackgroundData] = useState(defaultInfo.background)
+  
   const [heroInfo, setHeroInfo] = useState(defaultInfo)
   const [socialLinks, setSocialLinks] = useState(defaultSocialLinks)
   const [showSocialEditor, setShowSocialEditor] = useState(false)
   const [showIconPicker, setShowIconPicker] = useState<number | null>(null)
 
-  // localStorage에서 데이터 로드 - 편집 모드가 변경될 때마다 실행
+  // localStorage에서 데이터 로드
   useEffect(() => {
     const savedData = getData('hero-info') as typeof defaultInfo | null
     if (savedData) {
       setHeroInfo({ ...defaultInfo, ...savedData })
-      // background 데이터가 있으면 설정 (savedData에는 background 필드가 없음)
     }
     
     const savedSocial = getData('hero-social-links') as { name: string; icon: string; url: string }[] | null
@@ -71,14 +72,10 @@ export function Hero() {
     if (savedBg) {
       setBackgroundData(savedBg)
     }
-  }, [isEditMode]) // isEditMode가 변경될 때마다 데이터 다시 로드
+  }, [isEditMode])
 
   const updateHeroInfo = (key: string, value: string) => {
-    // 업데이트
-    const newInfo = {
-      ...heroInfo,
-      [key]: value
-    }
+    const newInfo = { ...heroInfo, [key]: value }
     setHeroInfo(newInfo)
     saveData('hero-info', newInfo)
   }
@@ -116,7 +113,6 @@ export function Hero() {
       projectsSection.scrollIntoView({ behavior: "smooth" })
     }
   }
-
 
   // 소셜 아이콘 렌더링 함수
   const renderSocialIcon = (link: { name: string; icon: string; url: string }, index: number) => {
@@ -158,7 +154,6 @@ export function Hero() {
         setBackgroundData(newData)
         saveData('hero-background', newData)
         
-        // heroInfo도 업데이트 (파일 저장을 위해)
         const updatedHeroInfo = { ...heroInfo, background: newData }
         setHeroInfo(updatedHeroInfo)
         saveData('hero-info', updatedHeroInfo)
@@ -166,21 +161,32 @@ export function Hero() {
       storageKey="hero-background"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      <section 
-        id="hero" 
-        className="w-full"
-      >
+      <section id="hero" className="w-full">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* 왼쪽: 텍스트 내용 */}
             <div className="order-2 md:order-1">
+              {/* ⬇️⬇️⬇️ 줄바꿈 수정됨 ⬇️⬇️⬇️ */}
               <h2 className="text-3xl font-bold mb-2">
                 <EditableText
-                  value={heroInfo.greeting}
-                  onChange={(value) => updateHeroInfo('greeting', value)}
-                  storageKey="hero-greeting"
+                  value={heroInfo.greeting.split("단국대학교")[0]}
+                  onChange={(value) => {
+                    const parts = heroInfo.greeting.split("단국대학교")
+                    updateHeroInfo('greeting', value + "단국대학교" + (parts[1] || ""))
+                  }}
+                  storageKey="hero-greeting-part1"
+                />
+                <br /> {/* 줄바꿈 태그 추가 */}
+                <EditableText
+                  value={"단국대학교" + heroInfo.greeting.split("단국대학교")[1]}
+                  onChange={(value) => {
+                    const parts = heroInfo.greeting.split("단국대학교")
+                    updateHeroInfo('greeting', parts[0] + value)
+                  }}
+                  storageKey="hero-greeting-part2"
                 />
               </h2>
+              {/* ⬆️⬆️⬆️ 줄바꿈 수정됨 ⬆️⬆️⬆️ */}
               <h1 className="text-5xl md:text-6xl font-bold mb-4">
                 <EditableText
                   value={heroInfo.name}
@@ -188,7 +194,8 @@ export function Hero() {
                   storageKey="hero-name"
                 />
               </h1>
-              <p className="text-2xl mb-4 text-muted-foreground">
+              {/* ⬇️⬇️⬇️ 여기 스타일이 변경되었습니다 (font-bold 추가, text-muted-foreground 제거) ⬇️⬇️⬇️ */}
+              <p className="text-2xl mb-4 font-bold">
                 <EditableText
                   value={heroInfo.title}
                   onChange={(value) => updateHeroInfo('title', value)}
@@ -232,7 +239,6 @@ export function Hero() {
               <div className="flex gap-4 flex-wrap items-center">
                 {socialLinks.map((link, index) => renderSocialIcon(link, index))}
                 
-                {/* 편집 버튼 */}
                 {isEditMode && (
                   <button
                     onClick={() => setShowSocialEditor(true)}
@@ -274,7 +280,7 @@ export function Hero() {
         </button>
       </section>
       
-      {/* 소셜 링크 편집 모달 */}
+      {/* 소셜 링크 편집 모달 (이하 생략 - 동일함) */}
       {showSocialEditor && isEditMode && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100]">
           <div className="bg-background border rounded-lg p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
@@ -400,7 +406,6 @@ export function Hero() {
                 </button>
                 <button
                   onClick={async () => {
-                    // Hero 컴포넌트의 모든 데이터를 수집
                     const allData = {
                       greeting: heroInfo.greeting,
                       name: heroInfo.name,
@@ -413,14 +418,10 @@ export function Hero() {
                       projectButton: heroInfo.projectButton,
                     }
                     
-                    // heroInfo 파일에 저장
                     const success1 = await saveToFile('hero', 'Info', allData)
-                    
-                    // 소셜 링크도 파일에 저장 (defaultSocialLinks 필드 업데이트)
                     const success2 = await saveFieldToFile('hero', 'defaultSocialLinks', socialLinks)
                     
                     if (success1 && success2) {
-                      // localStorage도 업데이트
                       saveData('hero-info', heroInfo)
                       saveData('hero-social-links', socialLinks)
                       saveData('hero-background', backgroundData)

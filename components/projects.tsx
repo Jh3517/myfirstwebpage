@@ -20,7 +20,7 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
           </h2>
           <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
             부동산 금융 및 투자 리스크에 대한 심층 분석 프로젝트입니다.
-            왼쪽 탭을 클릭하여 각 케이스 스터디를 확인하세요.
+            왼쪽 탭을 클릭하여 각 리포트를 확인하세요.
           </p>
         </div>
         
@@ -45,7 +45,7 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
               className={`showcase-tab ${activeTab === 'trust' ? 'active' : ''}`}
               onClick={() => setActiveTab('trust')}
             >
-              신탁원부 리스크 분석 (진행중)
+              신탁원부 리스크 분석
             </button>
           </div>
           
@@ -79,15 +79,14 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
             <div className={`showcase-content ${activeTab === 'auction' ? 'active' : ''}`}>
               <h3>부동산 경매 투자 물건 심층 분석</h3>
               <p>
-                권리분석(대항력/명도 리스크), LTV 80% 기반 자금조달(ROE 15.8%), 
-                3대 상권(CBD 업무지구/시장 상권/을지로 상권) 분석까지, 투자 전 과정을 A-to-Z로 수행한 보고서입니다.
+                실제 경매 물건인 "오랜지 카운티 을지로" 물건을 기반으로, 물건 선정 배경부터, 권리 분석을 통한 리스크 분석, 경락잔금대출을 통한 자금조달 계획, 수익성 분석, Exit 계획까지, 실제 투자를 가정한, 투자 전 과정을 연구한 보고서입니다.
               </p>
               <div className="showcase-tags">
                 <span>#권리분석</span>
-                <span>#명도리스크</span>
-                <span>#가치평가(Valuation)</span>
+                <span>#입지분석</span>
+                <span>#경락잔금대출</span>
                 <span>#ROE</span>
-                <span>#LTV 80%</span>
+                <span>#Exit</span>
               </div>
               <a 
                 href="/reports/report_auction.pdf" 
@@ -98,26 +97,28 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
               </a>
             </div>
             
-            {/* --- 콘텐츠 3: 신탁원부 (진행중) --- */}
+            {/* --- 콘텐츠 3: 신탁원부 --- */}
             <div className={`showcase-content ${activeTab === 'trust' ? 'active' : ''}`}>
-              <h3>(진행중) 신탁원부 분석을 통한 숨겨진 리스크 식별</h3>
+              <h3>신탁원부 분석을 통한 숨겨진 리스크 식별</h3>
               <p>
-                KB부동산신탁의 신탁원부 분석을 통해 KB부동산신탁의 리스크 관리 방안을 파악하여,  
+                KB부동산신탁이 진행한, 구리 유탑 유블레스 사업의 신탁원부 분석을 통해 각 사업 주체들의 리스크 관리 방안을 파악하여,  
                 PF 및 개발 사업 투자의 안정성을 확보하는 연구를 진행 중입니다.
               </p>
               <div className="showcase-tags">
                 <span>#신탁등기</span>
+                <span>#PF 구조</span>
                 <span>#우선수익권</span>
-                <span>#PF구조</span>
-                <span>#특수물건</span>
+                <span>#책임준공형 관리형 토지신탁</span>
                 <span>#리스크관리</span>
               </div>
-              <button 
-                disabled 
-                className="download-button disabled"
+              {/* ⬇️ 버튼 활성화 및 링크 연결 ⬇️ */}
+              <a 
+                href="/reports/report_trust.pdf" 
+                download 
+                className="download-button"
               >
-                🚧 보고서 준비중
-              </button>
+                📜 분석 리포트 PDF 보기
+              </a>
             </div>
             
           </div>

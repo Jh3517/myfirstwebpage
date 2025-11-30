@@ -92,19 +92,30 @@ const SKILL_ICONS = {
   users: Users,
 }
 
+// ⭐️ [수정됨] 취미 이름과 이미지 파일 매핑 ('여행' 제거)
+const HOBBY_IMAGES: Record<string, string> = {
+  "독서": "/hobby-reading.jpg",
+  "📚 독서": "/hobby-reading.jpg",
+  "카페 투어": "/hobby-cafe.jpg",
+  "☕ 카페 투어": "/hobby-cafe.jpg",
+  "전시회 관람": "/hobby-exhibition.jpg",
+  "🎨 전시회 관람": "/hobby-exhibition.jpg"
+}
+
 export function About() {
   const { getData, saveData, isEditMode, saveToFile } = useInlineEditor()
   // 기본 데이터
   const defaultInfo = {
     title: "소개",
-    subtitle: "",
+    subtitle: "  ",
     background: {"image":"","video":"","color":"","opacity":0.1},
-    experienceCards: [{"icon":"graduation","title":"단국대학교 도시계획부동산학부 ","period":"2022~","description":"전공 및 학위"},{"icon":"award","title":"투자자산운용사 자격증 취득","period":"2025","description":"자격증"}],
+    experienceCards: [{"icon":"graduation","title":"단국대학교 도시계획부동산학부 ","period":"2022~","description":"전공 및 학위"},{"icon":"award","title":"투자자산운용사 자격증 취득","period":"2025","description":"자격증"},{"icon":"target","title":"신용분석사 자격증 준비 ","period":"2025~","description":"자격증"}],
     skills: [{"icon":"barChart","title":"부동산 금융 및 계량 분석 ","description":"\"저는 '감'이 아닌 '데이터'로 시장을 분석합니다.\" "},{"icon":"shield","title":"부동산 투자 및 법률 분석 역량","description":"\"저는 '수익'만 보지 않고, 그 이면의 '리스크'를 먼저 식별합니다.\""},{"icon":"database","title":"프롭테크 기술 구현 역량","description":"\"저는 분석에서 멈추지 않고, '체험'할 수 있는 서비스로 구현합니다.\""}],
     storyTitle: "나의 이야기",
-    story: [" 부동산 시장은 '금융', '법률', 그리고 '데이터'가 복잡하게 얽힌 영역입니다. 저의 열정은 이 복잡성을 '기술(PropTech)'이라는 도구로 명확하게 분석하고, 가치 있는 솔루션으로 구현하는 일에 있습니다. 저는 금융의 언어와 코드의 언어를 모두 이해하는 'T자형 인재'를 목표로 합니다.","저는 '부동산 경매 투자' 프로젝트를 통해 등기부의 권리관계를 분석하고 '명도 리스크'를 식별하는 법적 분석력을 훈련했습니다. 또한, 'PF 부실화' 및 '주택금융' 보고서를 수행하며 VAR 모형, NPL(고정이하여신비율) 등 계량경제 모델을 통해 금융시장의 잠재적 리스크를 데이터로 증명하는 역량을 키웠습니다."," 저의 역량은 보고서에서 멈추지 않습니다. 저는 복잡한 '다중회귀분석' 결과를 누구나 쉽게 이해할 수 있는 \"AI 가치평가 시뮬레이터\"로, '시계열 분석' 데이터는 \"인터랙티브 금융 차트\"로 직접 구현했습니다. 즉, 분석에서 멈추지 않고, 경험까지 제공할 수 있는 기술이야말로 저의 강력한 무기입니다."," 하지만, 저는 아직 무르익지 않았습니다. 따라서 앞으로 다양한 프로젝트를 수행하며, 저의 송곳니를 더 예리하고 날카롭게 만들기 위해 끈임없이 노력하겠습니다."],
+    story: [" 부동산 시장은 '금융', '법률', 그리고 '데이터'가 복잡하게 얽힌 영역입니다. 저의 열정은 이 복잡성을 '프롭테크'라는 도구로 명쾌하게 시각화하는 일에 있습니다. 저는 금융의 언어와 코드의 언어를 모두 이해하는 'T자형 인재'를 목표로 합니다.","'저는 'PF 부실화가 금융기관에 미치는 영향'을 분석한 프로젝트를 수행하며 VAR 모형, NPL(고정이하여신비율) 등 계량경제 모델을 통해 가설을 데이터로 증명하는 역량을 키웠습니다. 또한, 저는 '부동산 경매 투자 프로젝트'를 통해 등기부 상의 권리관계 분석과, 입지 분석을 바탕으로 한 수익성 분석력을 훈련했습니다. 더불어, 저는 'KB 부동산 신탁의 신탁원부 분석'을 통해, 부동산 개발 사업의 전반적인 절차와, 각 사업 주체들의 리스크 관리 방안을 파악하여, 법적 자료를 통해 실제로 나타나는 영향을 분석하는 능력을 훈련했습니다."," 저의 역량은 보고서 작성에서 멈추지 않습니다. 저는 복잡한 '다중회귀분석' 결과를 누구나 쉽게 이해할 수 있는 \"AI 가치평가 시뮬레이터\"로, '시계열 분석' 데이터는 \"인터랙티브 금융 차트\"로 직접 구현했습니다. 즉, 분석에서 멈추지 않고, 경험까지 제공할 수 있는 기술이야말로 저의 강력한 무기입니다."," 하지만, 저는 아직 무르익지 않았습니다. 따라서 앞으로 다양한 프로젝트를 수행하며, 각 능력들의 전문성을 높여, 부동산 업계의 전문가로 거듭나기 위해 끊임없이 노력하겠습니다."],
     storyImage: "",
-    hobbies: ["📚 독서","☕ 카페 투어","🎨 전시회 관람","✈️ 여행"]
+    // ⭐️ [수정됨] 기본 취미 목록에서 '여행' 제거
+    hobbies: ["📚 독서","☕ 카페 투어","🎨 전시회 관람"]
   }
   
   const [aboutInfo, setAboutInfo] = useState(defaultInfo)
@@ -115,12 +126,13 @@ export function About() {
   const [showSkillModal, setShowSkillModal] = useState(false)
   const [showHobbyModal, setShowHobbyModal] = useState(false)
   
-  // localStorage에서 데이터 로드 - 편집 모드가 변경될 때마다 실행
+  // 선택된 취미 이미지를 저장할 상태
+  const [selectedHobbyImage, setSelectedHobbyImage] = useState<string | null>(null)
+  
   useEffect(() => {
     const savedData = getData('about-info') as typeof defaultInfo | null
     if (savedData) {
       setAboutInfo({ ...defaultInfo, ...savedData })
-      // background 데이터가 있으면 설정
       if (savedData.background) {
         setBackgroundData(savedData.background)
       }
@@ -130,7 +142,7 @@ export function About() {
     if (savedBg) {
       setBackgroundData(savedBg)
     }
-  }, [isEditMode]) // isEditMode가 변경될 때마다 데이터 다시 로드
+  }, [isEditMode])
   
   const updateAboutInfo = (key: string, value: string | boolean | typeof aboutInfo.skills | typeof aboutInfo.experienceCards | typeof aboutInfo.story | typeof aboutInfo.hobbies | number) => {
     const newInfo = { ...aboutInfo, [key]: value }
@@ -140,6 +152,7 @@ export function About() {
   
   const updateExperienceCard = (index: number, field: string, value: string) => {
     const newCards = [...aboutInfo.experienceCards]
+    // @ts-ignore
     newCards[index] = { ...newCards[index], [field]: value }
     updateAboutInfo('experienceCards', newCards)
   }
@@ -159,6 +172,7 @@ export function About() {
   
   const updateSkill = (index: number, field: string, value: string) => {
     const newSkills = [...aboutInfo.skills]
+    // @ts-ignore
     newSkills[index] = { ...newSkills[index], [field]: value }
     updateAboutInfo('skills', newSkills)
   }
@@ -198,6 +212,24 @@ export function About() {
   const removeHobby = (index: number) => {
     updateAboutInfo('hobbies', aboutInfo.hobbies.filter((_, i) => i !== index))
   }
+
+  // 취미 클릭 핸들러
+  const handleHobbyClick = (hobbyName: string) => {
+    if (isEditMode) return; // 편집 모드에서는 팝업 방지
+
+    const imagePath = HOBBY_IMAGES[hobbyName];
+    if (imagePath) {
+      setSelectedHobbyImage(imagePath);
+    } else {
+      // 이모지를 제거하고 재시도
+      const cleanName = hobbyName.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]\s?/, "").trim();
+      const fallbackPath = HOBBY_IMAGES[cleanName];
+      if (fallbackPath) {
+        setSelectedHobbyImage(fallbackPath);
+      }
+    }
+  }
+
   return (
     <EditableBackground
       image={backgroundData.image}
@@ -209,7 +241,6 @@ export function About() {
         setBackgroundData(newData)
         saveData('about-background', newData)
         
-        // aboutInfo도 업데이트 (파일 저장을 위해)
         const updatedAboutInfo = { ...aboutInfo, background: newData }
         setAboutInfo(updatedAboutInfo)
         saveData('about-info', updatedAboutInfo)
@@ -238,7 +269,7 @@ export function About() {
             </p>
           </div>
 
-          {/* 경험 카드 (경력/학력/자격증 등) */}
+          {/* 경험 카드 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {/* 경험 카드들 */}
             {aboutInfo.experienceCards?.map((card, index) => {
@@ -302,129 +333,114 @@ export function About() {
           </div>
 
           {/* 핵심 역량 */}
-{/* ========== ⭐️ 핵심 역량 (수정된 블록) ⭐️ ========== */}
-        {(aboutInfo.skills.length > 0 || isEditMode) && (
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
-              핵심 역량
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {aboutInfo.skills.map((skill, index) => {
-                const Icon = SKILL_ICONS[skill.icon as keyof typeof SKILL_ICONS] || Trophy
-                
-                // ⭐️ 각 카드별 상세 내용을 정의합니다 (index 0, 1, 2)
-                let detailsComponent;
-                if (index === 0) { // 첫 번째: 부동산 금융 및 계량 분석
-                  detailsComponent = (
-                    <div className="competency-details">
-                      <h4>📊 부동산 금융 및 계량 분석</h4>
-                      <h5>보유 역량</h5>
-                      <ul>
-                        <li><strong>시계열 분석:</strong> VAR, Granger 인과관계, IRF 등을 활용하여 금리 충격의 <strong>시차 효과(Lag Effect)</strong>를 계량적으로 분석함.</li>
-                        <li><strong>금융시장 인사이트:</strong> PF 연체율이 은행의 **BIS 비율** 및 **NPL**에 미치는 영향을 분석하고, 시중은행과 저축은행의 구조적 차이를 비교함.</li>
-                        <li><strong>데이터 전처리:</strong> 로그 변환 및 1차 차분을 통해 비정상 시계열 데이터를 가공.</li>
-                      </ul>
-                      <h5>학습 방향</h5>
-                      <ul>
-                        <li>머신러닝(ML) 기반 비선형 예측 모델을 학습하여, 부동산 가치평가(AVM) 모델의 정교화를 목표로 하고 있습니다.</li>
-                      </ul>
-                    </div>
-                  );
-                } else if (index === 1) { // 두 번째: 부동산 투자 및 법률 분석
-                  detailsComponent = (
-                    <div className="competency-details">
-                      <h4>⚖️ 부동산 투자 및 법률 분석</h4>
-                      <h5>보유 역량</h5>
-                      <ul>
-                        <li><strong>법률 실사 (Due Diligence):</strong> 등기부, 매각물건명세서 등을 교차 검증하여 <strong>대항력 없는 임차인</strong>을 특정하고 '권리분석상 안전한' 물건을 식별함.</li>
-                        <li><strong>리스크 관리:</strong> <strong>명도 리스크</strong> 및 체납관리비 리스크를 사전에 도출하고, '인도명령' 및 '협상비' 기반의 대응 전략을 수립.</li>
-                        <li><strong>가치평가(Valuation):</strong> '오피스텔' 용도를 활용한 **경락잔금대출 LTV 80%** 전략 및 **ROE 15.8%** 등 구체적인 수익성 분석.</li>
-                      </ul>
-                      <h5>학습 방향</h5>
-                      <ul>
-                        <li>NPL(부실채권) 투자, 상가 및 토지 등 <strong>특수물건</strong>의 권리분석 및 가치평가 방법론을 심화 학습 중입니다.</li>
-                      </ul>
-                    </div>
-                  );
-                } else if (index === 2) { // 세 번째: 프롭테크 기술 구현
-                  detailsComponent = (
-                    <div className="competency-details">
-                      <h4>💻 프롭테크 기술 구현</h4>
-                      <h5>보유 역량</h5>
-                      <ul>
-                        <li><strong>인터랙티브 UI/UX:</strong> 다중회귀분석 결과를 <strong>'AI 가치평가 시뮬레이터'</strong>로 구현.</li>
-                        <li><strong>데이터 시각화:</strong> 시계열 분석 데이터를 <strong>'Chart.js'</strong> 라이브러리 기반의 <strong>'인터랙티브 금융 차트'</strong>로 구현.</li>
-                        <li><strong>웹 개발:</strong> <strong>React(Next.js)</strong> 프레임워크를 사용하여 포트폴리오 사이트를 직접 구축하고 Vercel을 통해 배포.</li>
-                      </ul>
-                      <h5>학습 방향</h5>
-                      <ul>
-                        <li>Python(Flask)을 활용하여 계량 분석 모델을 **API로 직접 개발**하고, 이를 프론트엔드와 연동하는 풀스택(Full-Stack) 개발을 목표로 하고 있습니다.</li>
-                      </ul>
-                    </div>
-                  );
-                } else {
-                  detailsComponent = null; // 새로 추가하는 스킬은 상세 내용 없음
-                }
-
-                return (
-                  // ⭐️ 1. 'competency-card' 클래스 추가
-                  <div key={index} className="text-center relative competency-card p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
-                    {isEditMode && (
-                      <button
-                        onClick={() => removeSkill(index)}
-                        className={COMMON_STYLES.deleteButton}
-                      >
-                        <X className={COMMON_STYLES.deleteIcon} />
-                      </button>
-                    )}
-                    <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2">
-                      <EditableText
-                        value={skill.title}
-                        onChange={(value) => updateSkill(index, 'title', value)}
-                        storageKey={`about-skill-${index}-title`}
-                      />
-                    </h4>
-                    
-                    {/* ⭐️ 2. 콘텐츠 교체 영역 래퍼 */}
-                    <div className="competency-content-wrapper">
-                      
-                      {/* ⭐️ 3. 평소에 보일 요약문 */}
-                      <p className="text-sm text-muted-foreground competency-summary">
+          {(aboutInfo.skills.length > 0 || isEditMode) && (
+            <div className="mb-16">
+              <h3 className="text-2xl font-bold text-foreground mb-8 text-center">
+                핵심 역량
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {aboutInfo.skills.map((skill, index) => {
+                  const Icon = SKILL_ICONS[skill.icon as keyof typeof SKILL_ICONS] || Trophy
+                  return (
+                    <div key={index} className="text-center relative competency-card p-6 rounded-lg shadow-lg bg-gray-100 dark:bg-gray-800">
+                      {isEditMode && (
+                        <button
+                          onClick={() => removeSkill(index)}
+                          className={COMMON_STYLES.deleteButton}
+                        >
+                          <X className={COMMON_STYLES.deleteIcon} />
+                        </button>
+                      )}
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
+                        <Icon className="h-8 w-8 text-primary" />
+                      </div>
+                      <h4 className="font-semibold text-foreground mb-2">
                         <EditableText
-                          value={skill.description}
-                          onChange={(value) => updateSkill(index, 'description', value)}
-                          storageKey={`about-skill-${index}-description`}
-                          multiline
+                          value={skill.title}
+                          onChange={(value) => updateSkill(index, 'title', value)}
+                          storageKey={`about-skill-${index}-title`}
                         />
-                      </p>
+                      </h4>
                       
-                      {/* ⭐️ 4. 마우스를 올리면 나타날 상세 내용 */}
-                      {detailsComponent}
-                      
+                      {/* 콘텐츠 교체 영역 래퍼 */}
+                      <div className="competency-content-wrapper">
+                        
+                        {/* 평소에 보일 요약문 */}
+                        <p className="text-sm text-muted-foreground competency-summary">
+                          <EditableText
+                            value={skill.description}
+                            onChange={(value) => updateSkill(index, 'description', value)}
+                            storageKey={`about-skill-${index}-description`}
+                            multiline
+                          />
+                        </p>
+                        
+                        {/* 상세 내용 (조건부 렌더링) */}
+                        <div className="competency-details">
+                          {index === 0 && (
+                            <>
+                              <h4>📊 부동산 금융 및 계량 분석</h4>
+                              <h5>보유 역량</h5>
+                              <ul>
+                                <li><strong>시계열 분석:</strong> VAR, Granger 인과관계, IRF 등을 활용하여 금리 충격의 <strong>시차 효과(Lag Effect)</strong>를 계량적으로 분석함.</li>
+                                <li><strong>금융시장 인사이트:</strong> PF 연체율이 은행의 **BIS 비율** 및 **NPL**에 미치는 영향을 분석하고, 시중은행과 저축은행의 구조적 차이를 비교함.</li>
+                                <li><strong>데이터 전처리:</strong> 로그 변환 및 1차 차분을 통해 비정상 시계열 데이터를 가공.</li>
+                              </ul>
+                              <h5>학습 방향</h5>
+                              <ul>
+                                <li>머신러닝(ML) 기반 비선형 예측 모델을 학습하여, 부동산 가치평가(AVM) 모델의 정교화를 목표로 하고 있습니다.</li>
+                              </ul>
+                            </>
+                          )}
+                          {index === 1 && (
+                            <>
+                              <h4>⚖️ 부동산 투자 및 법률 분석</h4>
+                              <h5>보유 역량</h5>
+                              <ul>
+                                <li><strong>법률 실사 (Due Diligence):</strong> 등기부, 매각물건명세서 등을 교차 검증하여 <strong>대항력 없는 임차인</strong>을 특정하고 '권리분석상 안전한' 물건을 식별함.</li>
+                                <li><strong>리스크 관리:</strong> <strong>명도 리스크</strong> 및 체납관리비 리스크를 사전에 도출하고, '인도명령' 및 '협상비' 기반의 대응 전략을 수립.</li>
+                                <li><strong>가치평가(Valuation):</strong> '오피스텔' 용도를 활용한 **경락잔금대출 LTV 80%** 전략 및 **ROE 15.8%** 등 구체적인 수익성 분석.</li>
+                              </ul>
+                              <h5>학습 방향</h5>
+                              <ul>
+                                <li>NPL(부실채권) 투자, 상가 및 토지 등 <strong>특수물건</strong>의 권리분석 및 가치평가 방법론을 심화 학습 중입니다.</li>
+                              </ul>
+                            </>
+                          )}
+                          {index === 2 && (
+                            <>
+                              <h4>💻 프롭테크 기술 구현</h4>
+                              <h5>보유 역량</h5>
+                              <ul>
+                                <li><strong>인터랙티브 UI/UX:</strong> 다중회귀분석 결과를 <strong>'AI 가치평가 시뮬레이터'</strong>로 구현.</li>
+                                <li><strong>데이터 시각화:</strong> 시계열 분석 데이터를 <strong>'Chart.js'</strong> 라이브러리 기반의 <strong>'인터랙티브 금융 차트'</strong>로 구현.</li>
+                                <li><strong>웹 개발:</strong> <strong>React(Next.js)</strong> 프레임워크를 사용하여 포트폴리오 사이트를 직접 구축하고 Vercel을 통해 배포.</li>
+                              </ul>
+                              <h5>학습 방향</h5>
+                              <ul>
+                                <li>Python(Flask)을 활용하여 계량 분석 모델을 **API로 직접 개발**하고, 이를 프론트엔드와 연동하는 풀스택(Full-Stack) 개발을 목표로 하고 있습니다.</li>
+                              </ul>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+                {isEditMode && (
+                  <div 
+                    className="text-center border-2 border-dashed border-muted-foreground/30 rounded-lg p-6 flex items-center justify-center cursor-pointer hover:border-primary transition-all"
+                    onClick={() => setShowSkillModal(true)}
+                  >
+                    <div>
+                      <Settings className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <p className="text-sm text-muted-foreground">스킬 편집</p>
                     </div>
                   </div>
-                )
-              })}
-              
-              {isEditMode && (
-                <div 
-                  className="text-center border-2 border-dashed border-muted-foreground/30 rounded-lg p-6 flex items-center justify-center cursor-pointer hover:border-primary transition-all"
-                  onClick={() => setShowSkillModal(true)}
-                >
-                  <div>
-                    <Settings className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                    <p className="text-sm text-muted-foreground">스킬 편집</p>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-          </div>
-        )}
-        {/* ========== ⭐️ 핵심 역량 (수정된 블록) 끝 ⭐️ ========== */}
+          )}
 
           {/* 자기소개 상세 */}
           {(aboutInfo.story.length > 0 || isEditMode) && (
@@ -493,10 +509,18 @@ export function About() {
               </h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {aboutInfo.hobbies.map((hobby, index) => (
-                  <span key={index} className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm relative group flex items-center justify-center">
+                  // ⭐️ [수정됨] 클릭 이벤트 및 커서 스타일 추가
+                  <span 
+                    key={index} 
+                    className={`px-4 py-2 bg-primary/10 text-primary rounded-full text-sm relative group flex items-center justify-center transition-all hover:bg-primary/20 ${!isEditMode ? "cursor-pointer" : ""}`}
+                    onClick={() => handleHobbyClick(hobby)}
+                  >
                     {isEditMode && (
                       <button
-                        onClick={() => removeHobby(index)}
+                        onClick={(e) => {
+                            e.stopPropagation(); // 클릭 이벤트 버블링 방지
+                            removeHobby(index);
+                        }}
                         className={`${COMMON_STYLES.deleteButton} opacity-0 group-hover:opacity-100 transition-opacity`}
                       >
                         <X className={COMMON_STYLES.deleteIcon} />
@@ -523,6 +547,28 @@ export function About() {
           )}
         </div>
       </section>
+
+      {/* ⭐️ [추가됨] 취미 이미지 팝업 모달 */}
+      {selectedHobbyImage && (
+        <div 
+            className="fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200"
+            onClick={() => setSelectedHobbyImage(null)}
+        >
+            <div className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center" onClick={e => e.stopPropagation()}>
+                <button 
+                    onClick={() => setSelectedHobbyImage(null)}
+                    className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+                >
+                    <X className="h-8 w-8" />
+                </button>
+                <img 
+                    src={selectedHobbyImage} 
+                    alt="Hobby" 
+                    className="rounded-lg shadow-2xl max-w-full max-h-[85vh] object-contain bg-white"
+                />
+            </div>
+        </div>
+      )}
       
       {/* 경험 카드 편집 모달 */}
       {showCareerModal && isEditMode && (
@@ -564,8 +610,7 @@ export function About() {
                       <option value="heart">❤️ 열정</option>
                       <option value="coffee">☕ 일상</option>
                       <option value="user">👤 개인</option>
-                    </select
->
+                    </select>
                     
                     <div className="flex-1 space-y-2">
                       <input
