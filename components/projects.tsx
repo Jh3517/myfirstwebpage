@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image'; // 이미지 컴포넌트 추가
 
 // '핵심 역량' 섹션 컴포넌트
 export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세요
@@ -54,71 +55,113 @@ export function Projects() { // 컴포넌트 이름은 템플릿에 맞춰주세
             
             {/* --- 콘텐츠 1: PF 부실화 (기본 활성) --- */}
             <div className={`showcase-content ${activeTab === 'pf' ? 'active' : ''}`}>
-              <h3>PF 부실화와 금융기관 건전성 분석</h3>
-              <p>
-                저축은행과 시중은행의 PF 연체율, BIS 비율, NPL 등을 비교 분석하여
-                PF 부실화가 금융 시스템에 미치는 잠재적 리스크를 도출한 계량경제 분석 보고서입니다.
-              </p>
-              <div className="showcase-tags">
-                <span>#계량경제</span>
-                <span>#시계열분석 (VAR)</span>
-                <span>#NPL</span>
-                <span>#BIS비율</span>
-                <span>#금융건전성</span>
+              {/* ⭐️ 이미지 + 텍스트 레이아웃 (flex) */}
+              <div className="flex flex-col lg:flex-row gap-8 items-start">
+                {/* 이미지 영역 (4:3 비율로 변경하여 더 크게 보여줌) */}
+                <div className="w-full lg:w-5/12 relative aspect-[4/3] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 flex-shrink-0">
+                   {/* 이미지가 없다면 public/project-pf.jpg 파일을 넣어주세요 */}
+                  <Image 
+                    src="/project-pf.jpg" 
+                    alt="PF 부실화 분석"
+                    fill
+                    className="object-cover object-top" // 위쪽(제목) 중심으로 잘리도록 설정
+                  />
+                </div>
+
+                {/* 텍스트 영역 */}
+                <div className="flex-1">
+                  <h3>PF 부실화와 금융기관 건전성 분석</h3>
+                  <p>
+                    저축은행과 시중은행의 PF 연체율, BIS 비율, NPL 등을 비교 분석하여
+                    PF 부실화가 금융 시스템에 미치는 잠재적 리스크를 도출한 계량경제 분석 보고서입니다.
+                  </p>
+                  <div className="showcase-tags">
+                    <span>#시계열분석 (VAR)</span>
+                    <span>#NPL</span>
+                    <span>#BIS비율</span>
+                    <span>#금융건전성</span>
+                  </div>
+                  <a 
+                    href="/reports/report_pf.pdf" 
+                    download 
+                    className="download-button"
+                  >
+                    📜 분석 리포트 PDF 보기
+                  </a>
+                </div>
               </div>
-              <a 
-                href="/reports/report_pf.pdf" 
-                download 
-                className="download-button"
-              >
-                📜 분석 리포트 PDF 보기
-              </a>
             </div>
             
             {/* --- 콘텐츠 2: 경매 투자 --- */}
             <div className={`showcase-content ${activeTab === 'auction' ? 'active' : ''}`}>
-              <h3>부동산 경매 투자 물건 심층 분석</h3>
-              <p>
-                실제 경매 물건인 "오랜지 카운티 을지로" 물건을 기반으로, 물건 선정 배경부터, 권리 분석을 통한 리스크 분석, 경락잔금대출을 통한 자금조달 계획, 수익성 분석, Exit 계획까지, 실제 투자를 가정한, 투자 전 과정을 연구한 보고서입니다.
-              </p>
-              <div className="showcase-tags">
-                <span>#권리분석</span>
-                <span>#입지분석</span>
-                <span>#경락잔금대출</span>
-                <span>#ROE</span>
-                <span>#Exit</span>
+              <div className="flex flex-col lg:flex-row gap-8 items-start">
+                {/* 이미지 영역 (4:3 비율) */}
+                <div className="w-full lg:w-5/12 relative aspect-[4/3] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 flex-shrink-0">
+                   {/* 이미지가 없다면 public/project-auction.jpg 파일을 넣어주세요 */}
+                  <Image 
+                    src="/project-auction.jpg" 
+                    alt="경매 투자 분석"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3>부동산 경매 투자 물건 심층 분석</h3>
+                  <p>
+                    실제 경매 물건인 "오랜지 카운티 을지로" 물건을 기반으로, 물건 선정 배경부터, 권리 분석을 통한 리스크 분석, 
+                    경락잔금대출을 통한 자금조달 계획, 수익성 분석, Exit 계획까지, 실제 투자를 가정한, 투자 전 과정을 연구한 보고서입니다.
+                  </p>
+                  <div className="showcase-tags">
+                    <span>#권리분석</span>
+                    <span>#입지분석</span>
+                    <span>#경락잔금대출</span>
+                    <span>#ROE</span>
+                    <span>#Exit</span>
+                  </div>
+                  <a 
+                    href="/reports/report_auction.pdf" 
+                    download 
+                    className="download-button"
+                  >
+                    📜 투자 리포트 PDF 보기
+                  </a>
+                </div>
               </div>
-              <a 
-                href="/reports/report_auction.pdf" 
-                download 
-                className="download-button"
-              >
-                📜 투자 리포트 PDF 보기
-              </a>
             </div>
             
             {/* --- 콘텐츠 3: 신탁원부 --- */}
             <div className={`showcase-content ${activeTab === 'trust' ? 'active' : ''}`}>
-              <h3>신탁원부 분석을 통한 숨겨진 리스크 식별</h3>
-              <p>
-                KB부동산신탁이 진행한, 구리 유탑 유블레스 사업의 신탁원부 분석을 통해 각 사업 주체들의 리스크 관리 방안을 파악하여,  
-                PF 및 개발 사업 투자의 안정성을 확보하는 연구를 진행 중입니다.
-              </p>
-              <div className="showcase-tags">
-                <span>#신탁등기</span>
-                <span>#PF 구조</span>
-                <span>#우선수익권</span>
-                <span>#책임준공형 관리형 토지신탁</span>
-                <span>#리스크관리</span>
+              <div className="flex flex-col lg:flex-row gap-8 items-start">
+                {/* 이미지 영역 (4:3 비율) */}
+                <div className="w-full lg:w-5/12 relative aspect-[4/3] rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 flex-shrink-0">
+                   {/* 이미지가 없다면 public/project-trust.jpg 파일을 넣어주세요 */}
+                  <Image 
+                    src="/project-trust.jpg" 
+                    alt="신탁원부 분석"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3>신탁원부 분석을 통한 숨겨진 리스크 식별</h3>
+                  <p>
+                    KB부동산신탁이 진행한, 구리 유탑 유블레스 사업의 신탁원부 분석을 통해 각 사업 주체들의 리스크 관리 방안을 파악하여,  
+                    PF 및 개발 사업 투자의 안정성을 확보하는 연구를 진행했습니다.
+                  </p>
+                  <div className="showcase-tags">
+                    <span>#신탁원부</span>
+                    <span>#책임준공형 관리형 토지신탁</span>
+                    <span>#리스크관리</span>
+                  </div>
+                  <a 
+                    href="/reports/report_trust.pdf" 
+                    download 
+                    className="download-button"
+                  >
+                    📜 분석 리포트 PDF 보기
+                  </a>
+                </div>
               </div>
-              {/* ⬇️ 버튼 활성화 및 링크 연결 ⬇️ */}
-              <a 
-                href="/reports/report_trust.pdf" 
-                download 
-                className="download-button"
-              >
-                📜 분석 리포트 PDF 보기
-              </a>
             </div>
             
           </div>
