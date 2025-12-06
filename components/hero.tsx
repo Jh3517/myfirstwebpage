@@ -40,7 +40,7 @@ export function Hero() {
     name: "황정현입니다.",
     title: "부동산 업계의 전문가가 되기 위한 여정 중에 있습니다.",
     description: "",
-    profileImage: "",
+    profileImage: "/uploads/hero-profile-1765050650535.jpg",
     backgroundImage: "",
     backgroundVideo: "",
     backgroundOpacity: 0.1,
