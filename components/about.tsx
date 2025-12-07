@@ -151,7 +151,7 @@ export function About({ onHobbyModalStateChange }: AboutProps) {
   
   // 데이터 로드
   useEffect(() => {
-    const savedData = getData('about-info-v2') as typeof defaultInfo | null
+    const savedData = getData('about-info-v5') as typeof defaultInfo | null
     if (savedData) {
       setAboutInfo({ ...defaultInfo, ...savedData })
       if (savedData.background) {
@@ -168,7 +168,7 @@ export function About({ onHobbyModalStateChange }: AboutProps) {
   const updateAboutInfo = (key: string, value: any) => {
     const newInfo = { ...aboutInfo, [key]: value }
     setAboutInfo(newInfo)
-    saveData('about-info-v2', newInfo)
+    saveData('about-info-v5', newInfo)
   }
   
   const updateExperienceCard = (index: number, field: string, value: string) => {
@@ -448,7 +448,7 @@ export function About({ onHobbyModalStateChange }: AboutProps) {
                   )}
                 </div>
                 <div className="relative w-full h-full min-h-[500px] lg:min-h-full">
-                  <EditableMedia src={aboutInfo.storyImage} onChange={(src) => updateAboutInfo('storyImage', src)} type="image" storageKey="about-storyImage" className="w-full h-full object-cover" alt="소개 이미지" purpose="about-image" />
+                  <EditableMedia src="/uploads/my-story.jpg" onChange={(src) => updateAboutInfo('storyImage', src)} type="image" storageKey="about-storyImage" className="w-full h-full object-cover" alt="소개 이미지" purpose="about-image" />
                 </div>
               </div>
             </div>
