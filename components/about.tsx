@@ -151,7 +151,7 @@ export function About({ onHobbyModalStateChange }: AboutProps) {
   
   // 데이터 로드
   useEffect(() => {
-    const savedData = getData('about-info') as typeof defaultInfo | null
+    const savedData = getData('about-info-v2') as typeof defaultInfo | null
     if (savedData) {
       setAboutInfo({ ...defaultInfo, ...savedData })
       if (savedData.background) {
@@ -168,7 +168,7 @@ export function About({ onHobbyModalStateChange }: AboutProps) {
   const updateAboutInfo = (key: string, value: any) => {
     const newInfo = { ...aboutInfo, [key]: value }
     setAboutInfo(newInfo)
-    saveData('about-info', newInfo)
+    saveData('about-info-v2', newInfo)
   }
   
   const updateExperienceCard = (index: number, field: string, value: string) => {
